@@ -29,8 +29,10 @@ foreach (var item in people)
 }
 
 Console.WriteLine("--------");
+
 peopleArray = peopleArray.Concat(new string[] { "Kuba Taźbirek"}).ToArray();
 peopleArray[1] = "yo";
+peopleArray = peopleArray.Append("najs").ToArray();
 
 foreach (var item in peopleArray)
 {
