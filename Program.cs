@@ -47,10 +47,10 @@ for (int i = 0; i < bs.numbers2.Length; i++)
     Console.WriteLine($"sorted {i} i time");
     isSorted = false;
 
-    for (int j = 0; j < bs.numbers2.Length; j++)
+    for (int j = 0; j < bs.numbers2.Length - i; j++)
     {             
 
-        if (i + 1 >= bs.numbers2.Length || j + 1 >= bs.numbers2.Length)
+        if (i + 1 >= bs.numbers2.Length || j + 1 >= bs.numbers2.Length - i)
             break;
             
         else if (bs.numbers2[j] > bs.numbers2[j + 1])
@@ -62,6 +62,7 @@ for (int i = 0; i < bs.numbers2.Length; i++)
         }
         Console.WriteLine($"\tsorted {j} j time");
     }
+
     if (isSorted == false)
         break;
 }
