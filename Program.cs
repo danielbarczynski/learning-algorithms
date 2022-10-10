@@ -31,6 +31,7 @@ foreach (var item in ds.peopleArray)
 //-------------------------------------------------------------------------------------
 
 BubbleSort bs = new BubbleSort();
+bool isSorted = false;
 
 Console.WriteLine("before sorting:\n");
 
@@ -39,10 +40,16 @@ for (int i = 0; i < bs.numbers2.Length; i++)
     Console.Write(bs.numbers2[i] + " ");
 }
 
+Console.WriteLine();
+
 for (int i = 0; i < bs.numbers2.Length; i++)
 {
+    Console.WriteLine($"sorted {i} i time");
+    isSorted = false;
+
     for (int j = 0; j < bs.numbers2.Length; j++)
-    {      
+    {             
+
         if (i + 1 >= bs.numbers2.Length || j + 1 >= bs.numbers2.Length)
             break;
             
@@ -51,8 +58,12 @@ for (int i = 0; i < bs.numbers2.Length; i++)
             int storage = bs.numbers2[j + 1];
             bs.numbers2[j + 1] = bs.numbers2[j];  
             bs.numbers2[j] = storage;
+            isSorted = true;
         }
+        Console.WriteLine($"\tsorted {j} j time");
     }
+    if (isSorted == false)
+        break;
 }
 
 Console.WriteLine();
