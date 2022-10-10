@@ -42,3 +42,4 @@ for (int i = 0; i < numbers2.Length; i++)
 {
     Console.Write(numbers2[i] + " ");
 }
+
