@@ -1,45 +1,48 @@
 ﻿int[] numbers = new int[] { 3, 9, 6, 5, 1, 8, 2, 4 };
-int[] lowerNums = new int [] {};
-int[] higherNums = new int [] {};
-int[] sortedNums = new int [] {};
-int length = numbers.Length;
+QuickSort quickSort = new QuickSort();
+var quickArray = quickSort.SortArray(numbers, 0, numbers.Length - 1);
 
-Console.WriteLine("before sorting");
-
-for (int i = 0; i < length; i++)
+foreach (var item in quickArray)
 {
-    Console.Write(numbers[i]);
+    Console.Write(item + " ");
 }
 
-Console.WriteLine("\nafter sorting:");
-
-for (int i = 0; i < length; i++)
+public class QuickSort
 {
-    if (numbers[i] < numbers[length - 1]) 
-        lowerNums = lowerNums.Append(numbers[i]).ToArray();
-    
-    else if (numbers[i] > numbers[length - 1])
-        higherNums = higherNums.Append(numbers[i]).ToArray();
-        
-    else 
-        sortedNums = sortedNums.Append(numbers[i]).ToArray();
-}
+    public int[] SortArray(int[] array, int leftIndex, int rightIndex)
+    {
+        int i = leftIndex;
+        int j = rightIndex;
+        int pivot = array[leftIndex];
 
-for (int i = 0; i < lowerNums.Length; i++)
-{
-    Console.Write(lowerNums[i]);
-}
+        while (i <= j)
+        {
+            while (array[i] < pivot)
+            {
+                i++;
+            }
 
-Console.WriteLine();
+            while (array[j] > pivot)
+            {
+                j--;
+            }
 
-for (int i = 0; i < higherNums.Length; i++)
-{
-    Console.Write(higherNums[i]);
-}
+            if (i <= j)
+            {
+                int temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                i++;
+                j--;
+            }
+        }
 
-Console.WriteLine();
+        if (leftIndex < j)
+            SortArray(array, leftIndex, j);
 
-for (int i = 0; i < sortedNums.Length; i++)
-{
-    Console.Write(sortedNums[i]);
+        if (i < rightIndex)
+            SortArray(array, i, rightIndex);
+
+        return array;
+    }
 }
