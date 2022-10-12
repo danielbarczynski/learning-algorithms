@@ -108,10 +108,12 @@ public class QuickSort2
     } 
     public int[] SortArray(int[] array, int lowIndex, int highIndex)
     {
-        int pivot = highIndex;
+        Random random = new Random();
+        int pivotIndex = random.Next(lowIndex, highIndex);
+        int pivot = array[pivotIndex];
         int leftPointer = lowIndex;
         int rightPointer = highIndex;
-        
+
         while (array[leftPointer] < pivot && leftPointer < rightPointer)
         {
             leftPointer++;
