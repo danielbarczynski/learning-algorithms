@@ -110,20 +110,21 @@ public class QuickSort
         if (lowIndex >= highIndex)
             return;
 
-        Random random = new Random();
-        int pivotIndex = random.Next(lowIndex, highIndex);
-        int pivot = array[pivotIndex];
+        //Random random = new Random();
+        // int pivotIndex = random.Next(lowIndex, highIndex);
+        // int pivot = array[pivotIndex];
+        int pivot = array[highIndex];
         int leftPointer = lowIndex;
         int rightPointer = highIndex;
 
         while (leftPointer < rightPointer)
         {
-            while (array[leftPointer] < pivot && leftPointer < rightPointer)
+            while (array[leftPointer] <= pivot && leftPointer < rightPointer)
             {
                 leftPointer++;
             }
 
-            while (array[rightPointer] > pivot && leftPointer < rightPointer)
+            while (array[rightPointer] >= pivot && leftPointer < rightPointer)
             {
                 rightPointer--;
             }
@@ -131,9 +132,9 @@ public class QuickSort
             Swap(array, leftPointer, rightPointer);
         }
         
-        Swap(array, leftPointer, pivotIndex);
-        SortArray(array, lowIndex, leftPointer - 1);
+        Swap(array, leftPointer, highIndex);
         SortArray(array, leftPointer + 1, highIndex);
+        SortArray(array, lowIndex, leftPointer - 1);
     }
 
     public static void Swap(int[] array, int leftPointer, int rightPointer)
