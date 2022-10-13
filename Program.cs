@@ -73,60 +73,67 @@
 //     }
 // }
 
-int[] numbers2 = new int[10];
+int[] numbers = new int[10];
 Random random = new Random();
-QuickSort2 quickSort2 = new QuickSort2();
 
-for (int i = 0; i < numbers2.Length; i++)
+for (int i = 0; i < numbers.Length; i++)
 {
-    numbers2[i] = random.Next(1, 100); 
+    numbers[i] = random.Next(1, 100);
 }
 
 Console.WriteLine("before sorting: ");
 
-foreach (var item in numbers2)
+foreach (var item in numbers)
 {
     Console.Write(item + " ");
 }
 
-quickSort2.SortArray(numbers2);
+QuickSort.SortArray(numbers);
 
 Console.WriteLine("\nafter sorting: ");
 
-foreach (var item in numbers2)
+foreach (var item in numbers)
 {
     Console.Write(item + " ");
 }
 
-public class QuickSort2
+public class QuickSort
 {
-    public int[] SortArray(int[] array)
+    public static void SortArray(int[] array)
     {
         int lowIndex = 0;
         int highIndex = array.Length - 1;
-        return SortArray(array, lowIndex, highIndex);
-    } 
-    public int[] SortArray(int[] array, int lowIndex, int highIndex)
+        SortArray(array, lowIndex, highIndex);
+    }
+    public static void SortArray(int[] array, int lowIndex, int highIndex)
     {
+        if (lowIndex >= highIndex)
+            return;
+
         Random random = new Random();
         int pivotIndex = random.Next(lowIndex, highIndex);
         int pivot = array[pivotIndex];
         int leftPointer = lowIndex;
         int rightPointer = highIndex;
 
-        while (array[leftPointer] < pivot && leftPointer < rightPointer)
+        while (leftPointer < rightPointer)
         {
-            leftPointer++;
+            while (array[leftPointer] < pivot && leftPointer < rightPointer)
+            {
+                leftPointer++;
+            }
+
+            while (array[rightPointer] > pivot && leftPointer < rightPointer)
+            {
+                rightPointer--;
+            }
+            
+            Swap(array, leftPointer, rightPointer);
         }
-
-        while (array[rightPointer] > pivot && leftPointer < rightPointer)
-        {
-            rightPointer--;
-        }
-
-        Swap(array, leftPointer, rightPointer);
-
-        return array;
+        
+        Swap(array, leftPointer, pivotIndex);
+        SortArray(array, lowIndex, leftPointer - 1);
+        SortArray(array, leftPointer + 1, highIndex);
     }
 
     public static void Swap(int[] array, int leftPointer, int rightPointer)
