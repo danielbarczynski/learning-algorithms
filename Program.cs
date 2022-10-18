@@ -20,20 +20,20 @@ for (int i = 0; i <= itemsLength - 1; i++)
     for (int j = 0; j <= knapsackSize - 1; j++)
     {
         
-        if (items[i].Size <= j && i > 1 && i - 1 > 0)
+        if (items[i].Size <= i && i > 1 && i - 1 > 0 && j != 0)
         {
             if (items[i].Size + items[i - 1].Size <= j)
                 Console.Write(items[i].Value + items[i - 1].Value);
         }
 
-        else if (items[i].Size <= j)
+        else if (items[i].Size <= i && j != 0)
         {
             Console.Write(items[i].Value);
         }
 
         else
         {
-            if (i - 1 > 0)
+            if (i - 1 > 0 && j != 0)
                 Console.Write(items[i - 1].Value);
             else
                 Console.Write(0);
