@@ -16,11 +16,17 @@ foreach (var item in items)
 for (int i = 0; i <= itemsLength - 1; i++)
 {
     Console.WriteLine();
-
+// create arr[i, j] for storing ?
     for (int j = 0; j <= knapsackSize - 1; j++)
     {
         
-        if (items[i].Size <= j)
+        if (items[i].Size <= j && i > 1 && i - 1 > 0)
+        {
+            if (items[i].Size + items[i - 1].Size <= j)
+                Console.Write(items[i].Value + items[i - 1].Value);
+        }
+
+        else if (items[i].Size <= j)
         {
             Console.Write(items[i].Value);
         }
