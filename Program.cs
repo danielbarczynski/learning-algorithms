@@ -1,18 +1,45 @@
 ﻿Random random = new Random();
-int knapsackSize = random.Next(100, 200);
+double knapsackSize = random.Next(100, 200);
+int countItems = 0;
+List<Knapsack> items = new List<Knapsack>();
 List<Knapsack> knapsackItems = new List<Knapsack>();
 
 for (int i = 0; i < 20; i++)
 {
-    knapsackItems.Add(new Knapsack(random.Next(1, 30), random.Next(1, 30)));
+    items.Add(new Knapsack(random.Next(1, 30), random.Next(1, 30)));
+}
+Console.WriteLine("Knapsack size: " + knapsackSize);
+Console.WriteLine("\nItems: ");
+Console.WriteLine("\nS   V   P");
+
+foreach (var item in items)
+{
+    Console.WriteLine(item.Size + " | " + item.Value + " | " + item.Profitability);
 }
 
-Console.WriteLine("S   V   P");
+var sortedItems = items.OrderByDescending(x => x.Profitability);
+
+
+foreach (var item in sortedItems)
+{
+    if (knapsackSize - item.Size >= 0)
+    {
+        countItems++;
+        knapsackItems.Add(item);
+        knapsackSize = knapsackSize - item.Size;
+    }
+}
+
+Console.WriteLine("\nKnapsack items: ");
+Console.WriteLine("\nS   V   P");
 
 foreach (var item in knapsackItems)
 {
     Console.WriteLine(item.Size + " | " + item.Value + " | " + item.Profitability);
 }
+
+Console.WriteLine("\nKnapsack size: " + knapsackSize);
+Console.WriteLine("Number of knapsack items: " + countItems);
 
 public class Knapsack
 {
@@ -24,6 +51,6 @@ public class Knapsack
     {
         Size = size;
         Value = value;
-        Profitability = Math.Round(value/size, 2);
+        Profitability = Math.Round(value / size, 2);
     }
 }
