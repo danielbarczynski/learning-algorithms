@@ -1,56 +1,56 @@
-﻿Random random = new Random();
-double knapsackSize = random.Next(100, 200);
-int countItems = 0;
-List<Knapsack> items = new List<Knapsack>();
-List<Knapsack> knapsackItems = new List<Knapsack>();
-
-for (int i = 0; i < 20; i++)
+﻿List<Knapsack> items = new List<Knapsack>()
 {
-    items.Add(new Knapsack(random.Next(1, 30), random.Next(1, 30)));
-}
-Console.WriteLine("Knapsack size: " + knapsackSize);
+    new Knapsack(3, 2), new Knapsack(1, 2), new Knapsack(3, 4), new Knapsack(4, 5), new Knapsack(2, 3)
+};
+
+int knapsackSize = 7;
+int itemsLength = items.Count();
+
 Console.WriteLine("\nItems: ");
-Console.WriteLine("\nS   V   P");
 
 foreach (var item in items)
 {
-    Console.WriteLine(item.Size + " | " + item.Value + " | " + item.Profitability);
+    Console.WriteLine(item.Size + " | " + item.Value);
 }
 
-var sortedItems = items.OrderByDescending(x => x.Profitability);
-
-
-foreach (var item in sortedItems)
+for (int i = 0; i <= itemsLength - 1; i++)
 {
-    if (knapsackSize - item.Size >= 0)
+    Console.WriteLine();
+
+    for (int j = 0; j <= knapsackSize - 1; j++)
     {
-        countItems++;
-        knapsackItems.Add(item);
-        knapsackSize = knapsackSize - item.Size;
+        
+        if (items[i].Size <= j)
+        {
+            Console.Write(items[i].Value);
+        }
+
+        else
+        {
+            if (i - 1 > 0)
+                Console.Write(items[i - 1].Value);
+            else
+                Console.Write(0);
+        }
     }
 }
 
-Console.WriteLine("\nKnapsack items: ");
-Console.WriteLine("\nS   V   P");
-
-foreach (var item in knapsackItems)
-{
-    Console.WriteLine(item.Size + " | " + item.Value + " | " + item.Profitability);
-}
-
-Console.WriteLine("\nKnapsack size: " + knapsackSize);
-Console.WriteLine("Number of knapsack items: " + countItems);
 
 public class Knapsack
 {
     public double Size { get; set; }
     public double Value { get; set; }
-    public double Profitability { get; private set; }
+    private Knapsack[] arr = new Knapsack[7];
+
+    public Knapsack this[int i]
+    {
+        get { return arr[i]; }
+        set { arr[i] = value; }
+    }
 
     public Knapsack(double size, double value)
     {
         Size = size;
         Value = value;
-        Profitability = Math.Round(value / size, 2);
     }
 }
