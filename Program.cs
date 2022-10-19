@@ -28,13 +28,19 @@ static int Knapsack(int capacity, int[] weight, int[] value, int itemsCount)
 
 			else if (weight[i - 1] <= j)
 			{
-                knapsack[i, j] = Math.Max(value[i - 1] + knapsack[i - 1, j - weight[i - 1]], knapsack[i - 1, j]);
+				// current value + diagonal arrow value or vertical arrow
+				// for i = 2, j = 4 score = 4
+				// [2 + [1, 4 - 1] = 2, 2]
+				// Max(4, 2) = 4  
+				// weight[i - 1] - cofamy sie o tyle, ile wynosi waga j =5, waga 3, ponieważ wtedy wartość się zgadzała
+                knapsack[i, j] = Math.Max(value[i - 1] + knapsack[i - 1, j - weight[i - 1]], knapsack[i - 1, j]); 
 				Console.Write(knapsack[i, j] + " ");
 			}
 
 			else
             {
-			    knapsack[i, j] = knapsack[i - 1, j];
+				// value from vertical arrow
+			    knapsack[i, j] = knapsack[i - 1, j]; 
 				Console.Write(knapsack[i, j] + " ");
 			}
 		}
