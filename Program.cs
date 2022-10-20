@@ -2,7 +2,6 @@
 
 int[] numbers = new int[random.Next(10, 30)];
 int leftIndex = 0;
-int rightIndex = numbers.Length - 1;
 int iterationCount = 0;
 
 for (int i = 0; i < numbers.Length - 1; i++)
@@ -11,6 +10,7 @@ for (int i = 0; i < numbers.Length - 1; i++)
 }
 
 int[] sortedNumbers = numbers.OrderBy(x => x).ToArray();
+int rightIndex = sortedNumbers.Length - 1;
 
 Console.WriteLine("Sorted numbers:");
 
@@ -24,23 +24,24 @@ int targetNumber = Convert.ToInt32(Console.ReadLine());
 
 int result = BinarySearch(sortedNumbers, targetNumber, leftIndex, rightIndex);
 Console.WriteLine("\n\nNumber of iterations: " + iterationCount);
-Console.WriteLine("Result: " + result);
+Console.WriteLine("Target number found at index: " + result);
+Console.WriteLine("Result: " + sortedNumbers[result]);
 
 int BinarySearch(int[] numbers, int targetNumber, int leftIndex, int rightIndex)
 {
-    // prevent stack overflow (array length)
-    int middleNumber = leftIndex + ((rightIndex - leftIndex) / 2);
-    iterationCount++;
+    if (leftIndex <= rightIndex)
+    {
+        int middleNumber = rightIndex;
+        iterationCount++;
 
-    // prevent infinite recursion
-    if (leftIndex > rightIndex)
-        return -1;
+        if (numbers[middleNumber] == targetNumber)
+            return middleNumber;
 
-    if (numbers[middleNumber] == targetNumber)
-        return middleNumber;
+        else if (numbers[middleNumber] > targetNumber)
+            return BinarySearch(numbers, targetNumber, leftIndex, --middleNumber);
 
-    else if (numbers[middleNumber] > targetNumber)
-        BinarySearch(numbers, targetNumber, leftIndex, middleNumber - 1);
+        return BinarySearch(numbers, targetNumber, ++middleNumber, rightIndex);
+    }
 
-    return BinarySearch(numbers, targetNumber, middleNumber + 1, rightIndex);
+    return -1;
 }
