@@ -22,25 +22,46 @@ foreach (var item in sortedNumbers)
 Console.Write("\nEnter target number: ");
 int targetNumber = Convert.ToInt32(Console.ReadLine());
 
-int result = BinarySearch(sortedNumbers, targetNumber, leftIndex, rightIndex);
+int recursiveResult = BinarySearchRecursive(sortedNumbers, targetNumber, leftIndex, rightIndex);
+int iterativeResult = BinarySearchIterative(sortedNumbers, targetNumber, leftIndex, rightIndex);
 Console.WriteLine("\n\nNumber of iterations: " + iterationCount);
-Console.WriteLine("Target number found at index: " + result);
-Console.WriteLine("Result: " + sortedNumbers[result]);
+Console.WriteLine("Target number found at index: " + recursiveResult);
+Console.WriteLine("Recursive result: " + sortedNumbers[recursiveResult]);
+Console.WriteLine("Iterative result: " + sortedNumbers[iterativeResult]);
 
-int BinarySearch(int[] numbers, int targetNumber, int leftIndex, int rightIndex)
+int BinarySearchRecursive(int[] numbers, int targetNumber, int leftIndex, int rightIndex)
 {
     if (leftIndex <= rightIndex)
     {
-        int middleNumber = rightIndex;
+        int middleNumber = rightIndex - leftIndex;
         iterationCount++;
 
         if (numbers[middleNumber] == targetNumber)
             return middleNumber;
 
         else if (numbers[middleNumber] > targetNumber)
-            return BinarySearch(numbers, targetNumber, leftIndex, --middleNumber);
+            return BinarySearchRecursive(numbers, targetNumber, leftIndex, --middleNumber);
 
-        return BinarySearch(numbers, targetNumber, ++middleNumber, rightIndex);
+        return BinarySearchRecursive(numbers, targetNumber, ++middleNumber, rightIndex);
+    }
+
+    return -1;
+}
+
+int BinarySearchIterative(int[] numbers, int targetNumber, int leftIndex, int rightIndex)
+{
+    while (leftIndex <= rightIndex)
+    {
+        int middleNumber = rightIndex - leftIndex;
+
+        if (targetNumber == numbers[middleNumber])
+            return middleNumber;
+
+        else if (numbers[middleNumber] > targetNumber)
+            rightIndex = --middleNumber;
+        
+        else
+            leftIndex = ++middleNumber;
     }
 
     return -1;
