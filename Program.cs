@@ -18,7 +18,7 @@ Console.WriteLine(Square(300));
 Console.WriteLine(Square(300));
 
 Console.WriteLine(Fibonacci(40));
-Console.WriteLine("iterations: " + countIterations); // 77
+Console.WriteLine("iterations: " + countIterations); // 77. n = 40, n - 1 = 39, n - 2 = 38. 39 + 38 = 77
 Console.WriteLine();
 Console.WriteLine(Fibonacci2(40));
 Console.WriteLine("iterations: " + countIterations2); // 204668309 !!!
@@ -55,6 +55,7 @@ int Fibonacci(int n)
     
     else if (array[n] != 0)
         result = array[n];
+        
     else
         result = Fibonacci(n - 1) + Fibonacci(n - 2);
     
