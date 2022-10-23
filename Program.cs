@@ -1,22 +1,30 @@
-﻿Console.Write(Fibonacci(4));
-Console.Write(FibonacciRecursive(4));
+﻿FibonacciIterative(9);
+Console.WriteLine(FibonacciRecursive(9));
 
-int Fibonacci(int n)
+void FibonacciIterative(int n)
 {
-    if (n <= 2)
-        return 1;
+    int a = 0;
+    int b = 1; 
+    int c = 0;
     
-    int result = 0;
+    Console.Write(a + " " + b + " ");
 
-    for (int i = 0; i < n; i++)
+    for (int i = 2; i <= n; i++)
     {
-        result = i + (i - 1);
-    }
+        c = a + b;
 
-    return result;
+        Console.Write(c + " ");
+        
+        a = b;
+        b = c;
+    }
+    Console.WriteLine();
 }
 
 int FibonacciRecursive(int n)
 {
-    return n;
+    if (n <= 2)
+        return 1;
+    
+    return FibonacciRecursive(n - 1) + FibonacciRecursive(n - 2);
 }
