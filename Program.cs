@@ -75,37 +75,55 @@
 // }
 
 var tree = new Tree<int>(5);
-tree.AddLeftNode(tree, 10);
-tree.AddRightNode(tree, 8);
 
-Console.WriteLine(tree.LeftNode.Data);
+tree.AddNode(10);
+tree.AddNode(8);
+tree.AddNode(15);
+tree.AddNode(3);
+tree.AddNode(18);
+tree.AddNode(2);
+
+tree.Traversal();
 
 public class Tree<T>
 {
-    public T Data { get; set; }
-    public Tree<T> RightNode { get; set; }
-    public Tree<T> LeftNode { get; set; }
-    public List<T> Nodes { get; set; }
+    public int Data { get; set; }
+    public Tree<int> RightNode { get; set; }
+    public Tree<int> LeftNode { get; set; }
+    public List<int> Nodes { get; set; }
 
-    public Tree(T data)
+    public Tree(int data)
     {
         Data = data;
     }
 
-    public Tree<T> AddLeftNode(Tree<T> leftNode, T data)
+    public void AddNode(int value)
     {
-        LeftNode = leftNode;
-        LeftNode.Data = data;
-
-        return LeftNode;
+        if (value >= Data)
+        {
+            if (RightNode == null)
+                RightNode = new Tree<int>(value);
+            else
+                RightNode.AddNode(value);
+        }
+        
+        else
+        {
+            if (LeftNode == null)
+                LeftNode = new Tree<int>(value);
+            else
+                LeftNode.AddNode(value);
+        } 
     }
 
-    public Tree<T> AddRightNode(Tree<T> rightNode, T data)
+    public void Traversal()
     {
-        RightNode = rightNode;
-        RightNode.Data = data;
+        if (LeftNode != null)
+            LeftNode.Traversal();
+        
+        Console.Write(Data + " ");
 
-        return RightNode;
+        if (RightNode != null)
+            RightNode.Traversal();
     }
-
 }
