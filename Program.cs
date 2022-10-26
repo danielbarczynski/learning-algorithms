@@ -14,4 +14,3 @@ tree.Insert(20);
 tree.Traverse(); 
 
 Console.WriteLine();
-Console.WriteLine(tree.Root.Sum(0));

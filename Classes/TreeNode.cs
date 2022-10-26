@@ -6,6 +6,8 @@ namespace Tree
         public TreeNode RightNode { get; set; }
         public TreeNode LeftNode { get; set; }
         private int result = 0;
+        public List<int> treeList = new List<int>();
+
         public TreeNode(int data)
         {
             Data = data;
@@ -41,17 +43,6 @@ namespace Tree
 
             if (RightNode != null)
                 RightNode.Traverse();
-        }
-
-          public int Sum(int data)
-        {
-            if (LeftNode != null)
-                LeftNode.Sum(Data);
-
-            if (RightNode != null)
-                RightNode.Sum(Data);
-            
-            return result;
         }
     }
 }

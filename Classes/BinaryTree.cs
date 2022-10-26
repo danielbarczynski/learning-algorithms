@@ -18,13 +18,5 @@ namespace Tree
             if (Root != null)
                 Root.Traverse();
         }
-        
-        // public int Sum()
-        // {
-        //     if (Root != null)
-        //         Root.Sum();
-            
-        //     return Root.Sum();
-        // }
     }
 }
