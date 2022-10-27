@@ -5,8 +5,6 @@ namespace Tree
         public int Data { get; set; }
         public TreeNode RightNode { get; set; }
         public TreeNode LeftNode { get; set; }
-        // private int result = 0;
-        public List<int> treeList = new List<int>();
 
         public TreeNode(int data)
         {
