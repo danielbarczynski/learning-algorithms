@@ -1,6 +1,4 @@
-﻿using Tree;
-
-var tree = new TreeNode(5);
+﻿var tree = new TreeNode(5);
 
 tree.Insert(10);
 tree.Insert(3);
@@ -12,14 +10,6 @@ tree.Insert(22);
 tree.Insert(20);
 tree.Traverse();
 
-int sum = SumTree(tree);
+int sum = TreeNode.Sum(tree);
 
-Console.WriteLine("Sum of all elements in the tree: " + sum);
-
-int SumTree(TreeNode root)
-{
-    if (root == null)
-        return 0;
-
-    return root.Data + SumTree(root.LeftNode) + SumTree(root.RightNode);
-}
+Console.WriteLine("\nSum of all elements in the tree: " + sum);

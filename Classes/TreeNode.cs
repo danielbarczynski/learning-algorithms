@@ -1,69 +1,51 @@
-namespace Tree
+public class TreeNode
 {
-    public class TreeNode
+    public int Data { get; private set; }
+    public TreeNode RightNode { get; private set; }
+    public TreeNode LeftNode { get; private set; }
+
+    public TreeNode(int data)
     {
-        public int Data { get; set; }
-        public TreeNode RightNode { get; set; }
-        public TreeNode LeftNode { get; set; }
+        Data = data;
+    }
 
-        public TreeNode(int data)
+    public void Insert(int value)
+    {
+        if (value >= Data)
         {
-            Data = data;
-        }
-
-        public void Insert(int value)
-        {
-            if (value >= Data)
-            {
-                if (RightNode == null)
-                    RightNode = new TreeNode(value);
-
-                else
-                    RightNode.Insert(value);
-            }
+            if (RightNode == null)
+                RightNode = new TreeNode(value);
 
             else
-            {
-                if (LeftNode == null)
-                    LeftNode = new TreeNode(value);
-
-                else
-                    LeftNode.Insert(value);
-            }
+                RightNode.Insert(value);
         }
 
-        public void Traverse()
+        else
         {
-            if (LeftNode != null)
-                LeftNode.Traverse();
+            if (LeftNode == null)
+                LeftNode = new TreeNode(value);
 
-            Console.Write(Data + " ");
-
-            if (RightNode != null)
-                RightNode.Traverse();
+            else
+                LeftNode.Insert(value);
         }
+    }
 
-         public int NumberOfLeafNodes()
-        {
-            if (LeftNode == null && RightNode == null)
-            {
-                return 1;
-            }
+    public void Traverse()
+    {
+        if (LeftNode != null)
+            LeftNode.Traverse();
 
-            int leftLeaves = 0;
-            int rightLeaves = 0;
+        Console.Write(Data + " ");
 
-            if (LeftNode != null)
-            {
-                LeftNode.NumberOfLeafNodes();
-            }
+        if (RightNode != null)
+            RightNode.Traverse();
+    }
 
-            if (RightNode != null)
-            {
-                rightLeaves = RightNode.NumberOfLeafNodes();
-            }
+    public static int Sum(TreeNode root)
+    {
+        if (root == null)
+            return 0;
 
-            return leftLeaves + rightLeaves;
-        }
+        return root.Data + Sum(root.LeftNode) + Sum(root.RightNode);
     }
 }
