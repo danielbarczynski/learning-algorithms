@@ -18,5 +18,7 @@ namespace Tree
             if (Root != null)
                 Root.Traverse();
         }
+
+       
     }
 }

@@ -5,7 +5,7 @@ namespace Tree
         public int Data { get; set; }
         public TreeNode RightNode { get; set; }
         public TreeNode LeftNode { get; set; }
-        private int result = 0;
+        // private int result = 0;
         public List<int> treeList = new List<int>();
 
         public TreeNode(int data)
@@ -43,6 +43,29 @@ namespace Tree
 
             if (RightNode != null)
                 RightNode.Traverse();
+        }
+
+         public int NumberOfLeafNodes()
+        {
+            if (LeftNode == null && RightNode == null)
+            {
+                return 1;
+            }
+
+            int leftLeaves = 0;
+            int rightLeaves = 0;
+
+            if (LeftNode != null)
+            {
+                LeftNode.NumberOfLeafNodes();
+            }
+
+            if (RightNode != null)
+            {
+                rightLeaves = RightNode.NumberOfLeafNodes();
+            }
+
+            return leftLeaves + rightLeaves;
         }
     }
 }
