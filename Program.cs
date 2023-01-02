@@ -1,45 +1,38 @@
-﻿int[] numbers2 = new int[] { 2, 5, 4, 6, 7, 1 , 8, 9};
-bool isSorted = false;
-
-Console.WriteLine("before sorting:\n");
-
-for (int i = 0; i < numbers2.Length; i++)
+﻿int[] array = new int[] { 3, 6, 2, 8, 5, 9, 4, 7, 1 };
+var result = bubbleSort(array);
+foreach (var num in result)
 {
-    Console.Write(numbers2[i] + " ");
+    Console.Write(num + " ");
 }
 
-Console.WriteLine();
-
-for (int i = 0; i < numbers2.Length; i++)
+int[] bubbleSort(int[] array)
 {
-    Console.WriteLine($"sorted {i} i time");
-    isSorted = false;
-
-    for (int j = 0; j < numbers2.Length - i; j++)
-    {             
-
-        if (i + 1 >= numbers2.Length || j + 1 >= numbers2.Length - i)
-            break;
-            
-        else if (numbers2[j] > numbers2[j + 1])
+    for (int j = 0; j < array.Length - 1; j++)
+    {
+        Console.WriteLine($"sorted {j} j time");
+        bool isSorted = true;
+        for (int i = 0; i < array.Length - j; i++)
         {
-            int storage = numbers2[j + 1];
-            numbers2[j + 1] = numbers2[j];  
-            numbers2[j] = storage;
-            isSorted = true;
+            Console.WriteLine($"\tsorted {i} i time");
+            int temp = 0;
+            try
+            {
+                if (array[i] > array[i + 1])
+                {
+                    temp = array[i];
+                    array[i] = array[i + 1];
+                    array[i + 1] = temp;
+                    isSorted = false;
+                }
+            }
+            catch (IndexOutOfRangeException)
+            {
+                continue;
+            }
         }
-        Console.WriteLine($"\tsorted {j} j time");
+            if (isSorted == true)
+                break;
     }
 
-    if (isSorted == false)
-        break;
+    return array;
 }
-
-Console.WriteLine();
-Console.WriteLine("\nafter sorting:\n");
-
-for (int i = 0; i < numbers2.Length; i++)
-{
-    Console.Write(numbers2[i] + " ");
-}
-
