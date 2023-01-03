@@ -25,9 +25,9 @@ int[] bubbleSort(int[] array)
                     isSorted = false;
                 }
             }
-            catch (IndexOutOfRangeException)
+            catch (IndexOutOfRangeException e)
             {
-                continue;
+                Console.WriteLine(e.Message);
             }
         }
             if (isSorted == true)
