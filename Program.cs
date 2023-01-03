@@ -1,6 +1,7 @@
 ﻿Random random = new Random();
 double knapsackSize = random.Next(100, 200);
 int countItems = 0;
+double knapsackValue = 0;
 List<Knapsack> items = new List<Knapsack>();
 List<Knapsack> knapsackItems = new List<Knapsack>();
 
@@ -36,10 +37,12 @@ Console.WriteLine("\nS   V   P");
 foreach (var item in knapsackItems)
 {
     Console.WriteLine(item.Size + " | " + item.Value + " | " + item.Profitability);
+    knapsackValue += item.Value;
 }
 
-Console.WriteLine("\nKnapsack size: " + knapsackSize);
+Console.WriteLine("\nKnapsack size left: " + knapsackSize);
 Console.WriteLine("Number of knapsack items: " + countItems);
+Console.WriteLine("Knapsack value: " + knapsackValue);
 
 public class Knapsack
 {
