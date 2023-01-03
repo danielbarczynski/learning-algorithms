@@ -1,5 +1,4 @@
 ﻿var tree = new TreeNode(5);
-int[] nums = new int[2];
 tree.Insert(10);
 tree.Insert(3);
 tree.Insert(2);
